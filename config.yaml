@@ -1,0 +1,44 @@
+
+# /config.yaml
+
+artifacts_root: artifacts
+
+data_ingestion:
+  root_dir: artifacts/data_ingestion
+  # Replace with a direct CSV URL or a ZIP URL containing the wine CSV.
+  source_url: "https://github.com/entbappy/Branching-tutorial/raw/master/winequality-data.zip"
+  #source_url: "https://archive.ics.uci.edu/static/public/186/wine+quality.zip"
+  local_archive_path: artifacts/data_ingestion/wine_quality.zip
+  unzip_dir: data/raw
+  data_file_name: winequality-red.csv
+
+data_validation:
+  root_dir: artifacts/data_validation
+  data_path: data/raw/winequality-red.csv
+  status_file: artifacts/data_validation/status.txt
+  schema_path: schema.yaml
+
+data_transformation:
+  root_dir: artifacts/data_transformation
+  input_data_path: data/raw/winequality-red.csv
+  train_data_path: data/processed/train.csv
+  test_data_path: data/processed/test.csv
+  preprocessor_path: artifacts/data_transformation/preprocessor.joblib
+  train_test_split_ratio: 0.2
+  random_state: 42
+
+model_trainer:
+  root_dir: artifacts/model_trainer
+  train_data_path: data/processed/train.csv
+  test_data_path: data/processed/test.csv
+  model_name: ElasticNet
+  model_path: artifacts/model_trainer/model.joblib
+  target_column: quality
+
+model_evaluation:
+  root_dir: artifacts/model_evaluation
+  test_data_path: data/processed/test.csv
+  model_path: artifacts/model_trainer/model.joblib
+  metrics_json_path: artifacts/model_evaluation/metrics.json
+  mlflow_uri: file:./mlruns
+  experiment_name: Wine-Quality-Prediction

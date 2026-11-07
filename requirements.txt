@@ -1,0 +1,22 @@
+# /requirements.txt
+
+pandas
+numpy
+scikit-learn
+matplotlib
+seaborn
+mlflow
+notebook
+python-box==6.0.2
+PyYAML
+tqdm
+ensure==1.0.2
+joblib
+requests
+Flask
+Flask-Cors
+pytest
+
+-e .
+
+# pip install -r requirements.txt
